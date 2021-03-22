@@ -1,0 +1,3 @@
+showing books-
+
+{{  $book->author  }}

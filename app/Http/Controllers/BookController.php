@@ -16,24 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        // return Book::limit(5)->get();
-       
-        // $books = Book::simplePaginate(5);
-        // return view('bookView')->with('books',$books);
-
-        return view('bookView', [
-            'books' => DB::table('books')->paginate(15)
-        ]);
-
-        // $books = Book::paginate(5);
-        // $books->appends(['sort' => 'title']);
-        // return view('bookView')->with('books',$books);
-
-        // $books->withPath('/admin/users');
-
-        $books = Book::where('ISBN', '>', 888888)->simplePaginate(15);
-        return view('bookView')->with('books',$books);
-        
+        return view('books.index', [ 'books' => Book::orderBy('created_at', 'desc')->paginate(15) ]);
     }
 
     /**
@@ -43,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -54,7 +37,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([ 
+            'title'=>'required|max:100',
+            'author'=> 'required|max:100',
+            'author_address'=> 'nullable|max:191',
+            'ISBN'=> 'integer|digits_between:6,12',
+        ]);
+        $book = Book::create($request->input());
+        return redirect()->route('books.show', $book);
     }
 
     /**
@@ -65,7 +55,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', [ 'book' => $book ]);
     }
 
     /**
@@ -76,7 +66,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('books.edit', [ 'book' => $book ]);
     }
 
     /**
@@ -88,7 +78,20 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([ 
+            'title'=>'required|max:100',
+            'author'=> 'required|max:100',
+            'author_address'=> 'nullable|max:191',
+            'ISBN'=> 'integer|digits_between:6,12',
+        ]);
+        $book->update($request->input());
+        return redirect()->route('books.show', $book->id);
+    }
+
+
+    public function delete(Book $book)
+    {
+        return view('books.delete', [ 'book' => $book ]);
     }
 
     /**
@@ -99,6 +102,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('books');
     }
 }
