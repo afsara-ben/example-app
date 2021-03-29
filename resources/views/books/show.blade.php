@@ -1,6 +1,3 @@
-showing books
-{{ json_encode($book) }}
-
 <table class="table">
     <tr>
       <th>Title</th>

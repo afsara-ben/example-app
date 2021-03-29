@@ -4,5 +4,3 @@
     <a href="{{ route('books.store') }}">Store</a>
     <a href="{{ route('books.edit') }}">Edit</a>
 </div>
-
-@yield('content')

@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label for="ISBN">ISBN</label>
-        <input type="number" name="ISBN" class="form-control" id="ISBN" aria-describedby="ISBN" placeholder="Enter ISBN number">
+        <input type="number" name="ISBN" value="{{ old('ISBN') ?? $book->ISBN }}" class="form-control" id="ISBN" aria-describedby="ISBN" placeholder="Enter ISBN number">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

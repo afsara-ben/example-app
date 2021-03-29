@@ -40,4 +40,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the profile that owns the phone.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * The projects that belong to the user.
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
