@@ -15,6 +15,7 @@ Route::group([
     $router->resource('schools', SchoolController::class); 
     $router->resource('movies', MovieController::class);
     $router->resource('profiles', ProfileController::class);
+    $router->resource('articles', ArticleController::class);
 });
 
 

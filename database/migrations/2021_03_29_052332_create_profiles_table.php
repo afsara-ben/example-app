@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Mobile;
+use App\Models\Photo;
 
 class CreateProfilesTable extends Migration
 {
@@ -31,6 +32,13 @@ class CreateProfilesTable extends Migration
             $table->date('end_date')->nullable();
             $table->string('currency')->nullable();
 
+            $table->string('photo')->nullable();
+            $table->string('file')->nullable();
+            $table->string('multiImages')->nullable();
+            $table->string('multiFiles')->nullable();
+            // $table->unsignedBigInteger('photo_id');
+            // $table->foreign('photo_id')->references('id')->on('photos');
+            
 
 
             // $table->jobs('jobs');

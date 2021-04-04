@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mobile extends Model
+class Photo extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'number'
+        'title',
+        'src', //the path you uploaded the image
+        'mime_type',
+        'description',
+        'alt',
     ];
-
-    /**
-     * Get the profile that owns the phone.
-     */
+    
     public function profile()
     {
         return $this->belongsTo(Profile::class);
     }
-    
 }
