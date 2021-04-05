@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\User;
+use Encore\Admin\Facades\Admin;
 
 class ProfileController extends AdminController
 {
@@ -40,8 +41,7 @@ class ProfileController extends AdminController
         $grid->column('end_date', __('End Date'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-        $grid->column('photo', __('Profile Photo'));
-        $grid->column('file', __('Uploaded File'));
+        $grid->column('photo', __('Uploaded Photos'));
         
         return $grid;
     }
@@ -83,8 +83,14 @@ class ProfileController extends AdminController
 
         $form->tab('Basic info', function ($form) {
 
-            $form->text('username');
-            $form->email('email');
+            $form->text('username')->default('afsara');
+            $form->email('email')->default('afsara.benazir@gmail.com');
+            // dd(Admin::user());
+            // $form->text('user.name');
+            // $form->text('user.email');
+            
+            // $form->text('name')->value(Admin::user()->name);
+
             // $form->multipleSelect($column = 'mobile')->options([1 => 1234, 2 => 5678, 'val' => 9101112]);  ---------?
             $form->hasMany('mobiles', function (Form\NestedForm $form) {
                 $form->number('number')->default('999');
@@ -131,7 +137,7 @@ class ProfileController extends AdminController
             //IMAGE UPLOAD SECTION
             // $form->image('photo', 'Photo');
             // $form->hasMany('photos', function (Form\NestedForm $form) {
-            //     $form->image('photo', 'Photo');
+            //     $form->image('src', 'Photo');
             // });
 
             // Modify the image upload path and file name
@@ -189,13 +195,13 @@ class ProfileController extends AdminController
 
             // Multi-picture/file upload
             // Multi-map -----???
-            // $form->multipleImage('multiImages', 'Multi Images');
+            $form->multipleImage('photo', 'Multi Images');
 
             // Add delete button
             // $form->multipleImage('multiImages', 'Multi Images')->removable();
 
             // // multiple files ---????
-            // $form->multipleFile('multiFiles', 'Multi Files');
+            // $form->multipleFile('photos', 'Multi photos')->pathColumn('src')->removable();
 
             // // Add delete button
             // $form->multipleFile('multiFiles', 'Multi Files')->removable();
@@ -203,7 +209,7 @@ class ProfileController extends AdminController
             // // draggable sorting since v1.6.12
             // $form->multipleImage('pictures')->sortable();
 
-            $form->multipleFile('attachments','Attachments')->pathColumn('path')->removable();
+            // $form->multipleFile('attachments','Attachments')->pathColumn('path')->removable();
         }
     );
 

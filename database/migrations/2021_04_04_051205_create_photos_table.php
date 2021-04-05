@@ -15,11 +15,12 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id(); //you save this id in other tables
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('src');
             $table->string('mime_type')->nullable();
             $table->string('alt')->nullable();
             $table->text('description')->nullable();
+            $table->foreignId('profile_id')->unsigned()->constrained();
             $table->timestamps();
         });
     }

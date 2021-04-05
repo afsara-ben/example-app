@@ -56,4 +56,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class);
     }
+
+    /**
+     * The profile that belong to the user.
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

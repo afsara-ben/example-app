@@ -18,6 +18,12 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->text('username');
+            
+            // $table->foreignId('user_id')->unsigned()->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('admin_users');
+            
+            
             $table->text('email');
             // $table->image('image');
             $table->text('address');
@@ -34,8 +40,8 @@ class CreateProfilesTable extends Migration
 
             $table->string('photo')->nullable();
             $table->string('file')->nullable();
-            $table->string('multiImages')->nullable();
-            $table->string('multiFiles')->nullable();
+            // $table->string('multiImages')->nullable();
+            // $table->string('multiFiles')->nullable();
             // $table->unsignedBigInteger('photo_id');
             // $table->foreign('photo_id')->references('id')->on('photos');
             

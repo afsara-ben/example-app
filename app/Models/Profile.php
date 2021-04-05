@@ -15,18 +15,23 @@ class Profile extends Model
 
     public function photos()
     {
-        return $this->hasMany(Photo::class, 'photo_id');
+        return $this->hasMany(Photo::class);
     }
 
-    public function setPicturesAttribute($multiImages)
+    public function user()
     {
-        if (is_array($multiImages)) {
-            $this->attributes['multiImages'] = json_encode($multiImages);
+        return $this->belongsTo(User::class);
+    }
+
+    public function setPhotoAttribute($photo)
+    {
+        if (is_array($photo)) {
+            $this->attributes['photo'] = json_encode($photo);
         }
     }
 
-    public function getPicturesAttribute($multiImages)
+    public function getPhotoAttribute($photo)
     {
-        return json_decode($multiImages, true);
+        return json_decode($photo, true);
     }
 }

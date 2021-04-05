@@ -21,7 +21,7 @@ class ProjectSeeder extends Seeder
         foreach($projects as $project)
         {
             $project->save();
-            $project->users()->attach(51);
+            // $project->users()->attach(51);
             $project->users()->attach(rand(1, 50));
             $project->users()->attach(rand(1, 50));
             $project->users()->attach(rand(1, 50));

@@ -9,6 +9,11 @@ class Attachment extends Model
 {
     use HasFactory;
     protected $fillable = ['path'];
+
+    // protected $casts = [
+    //     'path' =>'json',
+    // ];
+    
     public function article()
     {
         return $this->belongsTo(Article::class);
